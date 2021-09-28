@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_animations/logic/cubit/home_cubit/home_cubit.dart';
+import 'package:my_animations/logic/cubit/knightrider_cubit/knightrider_cubit.dart';
 import 'package:my_animations/screens/animation_screens/knight_rider_screen.dart';
 
 import '../home_screen.dart';
@@ -21,7 +22,10 @@ class AppRouter {
       case knightRider:
         String name = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (_) => KnightRiderScreen(name: name),
+          builder: (_) => BlocProvider(
+            create: (context) => KnightriderCubit(),
+            child: KnightRiderScreen(name: name),
+          ),
         );
       default:
         throw "Route not found!";
